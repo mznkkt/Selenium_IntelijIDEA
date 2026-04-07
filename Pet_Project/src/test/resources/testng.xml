@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="MySuite">
+    <test name="AllTests">
+        <classes>
+            <class name="Pet_Project.RegisterUserTest">
+                <methods>
+                    <include name="waitForPageLoad"/>
+                    <include name="testPageTitle"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

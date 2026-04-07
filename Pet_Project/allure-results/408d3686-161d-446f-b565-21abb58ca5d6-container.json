@@ -1,0 +1,1 @@
+{"uuid":"408d3686-161d-446f-b565-21abb58ca5d6","name":"Pet_Project.Register_User.setUp","children":["28f91021-1b39-4795-af8f-cb10d70c75ef"],"description":"","befores":[{"name":"setUp","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1774530160114,"stop":1774530165013}],"afters":[],"start":1774530160113,"stop":1774530165013}

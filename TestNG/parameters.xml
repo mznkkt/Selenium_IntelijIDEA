@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "src/test/resources/testng-1.0.dtd">
+<suite name="Reression Suite">
+  <test name="TestParametersFromXML Test">
+  <parameter name ="browser" value ="firefox"></parameter>
+  <parameter name ="env" value ="qa"></parameter>
+    <classes>
+      <class name="parameterization.TestParametersFromXML"/>
+    </classes>
+  </test> <!-- Test -->
+  
+   <test name="TestParametersFromXML2 Test">
+  <parameter name ="browser" value ="chrome"></parameter>
+  <parameter name ="env" value ="uat"></parameter>
+    <classes>
+      <class name="parameterization.TestParametersFromXML"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

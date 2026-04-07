@@ -1,0 +1,27 @@
+.metadata/ 
+# Общие для Java
+*.class
+target/
+build/
+
+# Eclipse
+.settings/
+.classpath
+.project
+bin/
+
+# Maven
+log/
+test-output/
+dependency-reduced-pom.xml
+
+# Intellij IDEA (на всякий случай)
+.idea/
+*.iml
+
+# Логи
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
