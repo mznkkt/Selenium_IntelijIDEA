@@ -2,10 +2,9 @@
 <suite name="MySuite">
     <test name="AllTests">
         <classes>
-            <class name="Pet_Project.RegisterUserTest">
+            <class name="Pet_Project.RegistrationTests">
                 <methods>
-                    <include name="waitForPageLoad"/>
-                    <include name="testPageTitle"/>
+                    <include name="SignUpPage"/>
                 </methods>
             </class>
         </classes>
