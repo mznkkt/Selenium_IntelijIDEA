@@ -2,6 +2,15 @@
 <suite name="MySuite">
     <test name="AllTests">
         <classes>
+            <class name="Pet_Project.HomePageTests">
+                <methods>
+                    <include name="tearDown"/>
+                    <include name="testPageTitle"/>
+                    <include name="testURL"/>
+                    <include name="testLogo"/>
+                    <include name="waitForPageLoad"/>
+                </methods>
+            </class>
             <class name="Pet_Project.RegistrationTests">
                 <methods>
                     <include name="SignUpPage"/>
