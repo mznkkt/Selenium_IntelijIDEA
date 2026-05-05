@@ -110,7 +110,7 @@ public class RegistrationTests {
     }
 
     @Test
-    public void LogIn_User(){
+    public void RegisterUser(){
         inputName.sendKeys(name);
         inputEmail.sendKeys(email);
         submitButton.click();
