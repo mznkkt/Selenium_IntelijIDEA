@@ -2,18 +2,16 @@
 <suite name="MySuite">
     <test name="AllTests">
         <classes>
-            <class name="Pet_Project.HomePageTests">
+            <class name="Pet_Project.ProductPageTests">
                 <methods>
-                    <include name="tearDown"/>
-                    <include name="testPageTitle"/>
-                    <include name="testURL"/>
-                    <include name="testLogo"/>
-                    <include name="waitForPageLoad"/>
+                    <include name="allProductImagesLoadedViaSingleJS"/>
                 </methods>
             </class>
             <class name="Pet_Project.RegistrationTests">
                 <methods>
-                    <include name="SignUpPage"/>
+                    <include name="ValidateFieldName"/>
+                    <include name="ValidateFieldEmail"/>
+
                 </methods>
             </class>
         </classes>

@@ -35,17 +35,17 @@ public class RegistrationTests {
         options.addArguments("--headless=new");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-gpu");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         //driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         name = faker.name().fullName(); //"Ekaterina";
         email = faker.internet().emailAddress(); //"mznkkt14195@gmail.com";
         driver.get("https://automationexercise.com/login");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder='Name']")));
 
-        inputName = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/form/input[2]"));
-        inputEmail  = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/form/input[3]"));
-        submitButton = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/form/button"));
+        inputName = driver.findElement(By.xpath("//input[@placeholder='Name']"));
+        inputEmail  = driver.findElement(By.xpath("//input[@data-qa='signup-email']"));
+        submitButton = driver.findElement(By.xpath("//button[@data-qa='signup-button']"));
 
 
     }
@@ -81,7 +81,7 @@ public class RegistrationTests {
         inputName.sendKeys(name);
         inputEmail.sendKeys(email);
         submitButton.click();
-        captureScreenshot ("Главная страница загружена");
+        captureScreenshot ("Форма регистрации загружена");
         try {
             WebElement errorMsgElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("//*[@id=\"form\"]/div/div/div[3]/div/form/p")));
@@ -92,7 +92,7 @@ public class RegistrationTests {
             }
         }
         catch(TimeoutException e){
-            log.info("Тест 5 успешно завершен.");
+            log.info("Тест \"Форма регистрации\" успешно завершен.");
         }
     }
 
@@ -113,6 +113,10 @@ public class RegistrationTests {
     public void RegisterUser(){
         inputName.sendKeys(name);
         inputEmail.sendKeys(email);
+        ((JavascriptExecutor) driver).executeScript(
+                "var iframes = document.querySelectorAll('iframe[id^=\"aswift_\"]'); " +
+                        "iframes.forEach(function(iframe) { iframe.remove(); });"
+        );
         submitButton.click();
         WebElement inputPassword = driver.findElement(By.xpath("//*[@id=\"password\"]"));
         WebElement radioButton = driver.findElement(By.xpath("//*[@id=\"id_gender2\"]"));
@@ -150,7 +154,7 @@ public class RegistrationTests {
         String expectedMessage = "ACCOUNT CREATED!";
         Assert.assertEquals(actualMessage, expectedMessage,
                 "Текст подтверждения не совпадает: ожидалось '" + expectedMessage + "', получено '" + actualMessage + "'");
-        log.info("Тест 6 успешно завершен."+" "+"Пользователь "+firstName+" "+lastName+" "+"успешно зарегистрирован.");
+        log.info("Тест \"Регистрация пользователя\" успешно завершен."+" "+"Пользователь: "+firstName+" "+lastName+" ");
 
 
 

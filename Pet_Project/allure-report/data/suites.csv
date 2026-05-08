@@ -1,0 +1,5 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","64","ValidateFieldName","MySuite","2026-05-06","passed","2026-05-06","Pet_Project.RegistrationTests","AllTests","Pet_Project.RegistrationTests","ValidateFieldName"
+"","375","allProductImagesLoadedViaSingleJS","MySuite","2026-05-06","passed","2026-05-06","Pet_Project.ProductPageTests","AllTests","Pet_Project.ProductPageTests","allProductImagesLoadedViaSingleJS"
+"","2322","RegisterUser","MySuite","2026-05-06","passed","2026-05-06","Pet_Project.RegistrationTests","AllTests","Pet_Project.RegistrationTests","RegisterUser"
+"","56","ValidateFieldEmail","MySuite","2026-05-06","passed","2026-05-06","Pet_Project.RegistrationTests","AllTests","Pet_Project.RegistrationTests","ValidateFieldEmail"
