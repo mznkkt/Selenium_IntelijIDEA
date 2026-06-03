@@ -39,6 +39,7 @@ public class HomePageTests {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://automationexercise.com/");
+
     }
 
     @AfterMethod
@@ -49,7 +50,7 @@ public class HomePageTests {
         }
     }
 
-    @Test
+    @Test(priority = 1)
     public void testPageTitle() {
         log.info("Запуск теста: проверка заголовка главной страницы");
         String expectedTitle = "Automation Exercise";
@@ -59,7 +60,7 @@ public class HomePageTests {
         log.info("Тест 1 успешно завершен");
     }
 
-    @Test
+    @Test(priority = 2)
     public void testURL() {
         log.info("Запуск теста: проверка URL страницы");
         String currentUrl = driver.getCurrentUrl();
@@ -70,7 +71,7 @@ public class HomePageTests {
         log.info("Тест 2 успешно завершен");
     }
 
-    @Test
+    @Test(priority = 3)
     public void testLogo(){
         log.info("Запуск теста: проверка логотипа страницы");
         WebElement logo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".logo")));
@@ -78,7 +79,7 @@ public class HomePageTests {
         log.info("Тест 3 успешно завершен");
     }
 
-    @Test
+    @Test(priority = 4)
     public void waitForPageLoad() {
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(webDriver -> Objects.equals(((JavascriptExecutor) webDriver)

@@ -36,7 +36,7 @@ public class LogInTests{
         options.addArguments("--headless=new");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-gpu");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         //driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.get("https://automationexercise.com/login");
@@ -47,6 +47,7 @@ public class LogInTests{
         submitButton = driver.findElement(By.xpath("//button[@data-qa='login-button']"));
 
     }
+
     @AfterMethod
     public final void teardown() {
         if (driver != null) {

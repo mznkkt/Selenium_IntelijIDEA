@@ -63,19 +63,19 @@ public class RegistrationTests {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
-    @Test
+    @Test(priority = 1)
     public void ValidateFieldName(){
         inputName.sendKeys(name);
         validateField(inputName, "Name");
     }
 
-    @Test
+    @Test(priority = 2)
     public void ValidateFieldEmail(){
         inputEmail.sendKeys(email);
         validateField(inputEmail, "Email");
     }
 
-    @Test
+    @Test(priority = 3)
     public void SignUpPage() {
         System.out.println(email);
         inputName.sendKeys(name);
@@ -109,7 +109,7 @@ public class RegistrationTests {
         }
     }
 
-    @Test
+    @Test(priority = 4)
     public void RegisterUser(){
         inputName.sendKeys(name);
         inputEmail.sendKeys(email);
@@ -122,7 +122,7 @@ public class RegistrationTests {
         WebElement radioButton = driver.findElement(By.xpath("//*[@id=\"id_gender2\"]"));
         WebElement inputFirstName = driver.findElement(By.xpath("//*[@id=\"first_name\"]"));
         WebElement inputLastName = driver.findElement(By.xpath("//*[@id=\"last_name\"]"));
-        WebElement inputAdress = driver.findElement(By.xpath("//*[@id=\"address1\"]"));
+        WebElement inputAddress = driver.findElement(By.xpath("//*[@id=\"address1\"]"));
         WebElement inputState = driver.findElement(By.xpath("//*[@id=\"state\"]"));
         WebElement inputCity = driver.findElement(By.xpath("//*[@id=\"city\"]"));
         WebElement inputZipcode = driver.findElement(By.xpath("//*[@id=\"zipcode\"]"));
@@ -142,7 +142,7 @@ public class RegistrationTests {
         inputPassword.sendKeys(password);
         inputFirstName.sendKeys(firstName);
         inputLastName.sendKeys(lastName);
-        inputAdress.sendKeys(address);
+        inputAddress.sendKeys(address);
         inputState.sendKeys(state);
         inputCity.sendKeys(city);
         inputZipcode.sendKeys(zipcode);

@@ -1,19 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="MySuite">
-    <test name="AllTests">
+    <test name="AllTests" preserve-order="true">
         <classes>
-            <class name="Pet_Project.ProductPageTests">
-                <methods>
-                    <include name="allProductImagesLoadedViaSingleJS"/>
-                </methods>
-            </class>
-            <class name="Pet_Project.RegistrationTests">
-                <methods>
-                    <include name="ValidateFieldName"/>
-                    <include name="ValidateFieldEmail"/>
-
-                </methods>
-            </class>
+           <!-- <class name="Pet_Project.HomePageTests"/>
+            <class name="Pet_Project.RegistrationTests"/>
+            <class name="Pet_Project.LogInTests"/>
+            <class name="Pet_Project.LogOutTests"/>-->
+            <class name="Pet_Project.ProductPageTests"/>
         </classes>
     </test>
 </suite>

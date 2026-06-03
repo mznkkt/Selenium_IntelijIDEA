@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.43.0</version>
+            <version>4.44.0</version>
         </dependency>
 
         <!-- TestNG -->
@@ -107,10 +107,10 @@
                         </property>
                     </properties>
                     <!-- Системные свойства Allure -->
-                    <systemProperties>
+                    <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                         <allure.debug>true</allure.debug>
-                    </systemProperties>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <!-- AspectJ для плагина -->
