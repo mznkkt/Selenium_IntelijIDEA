@@ -126,7 +126,7 @@ public class ProductPageTests {
     @Test(priority = 5)
     public void usingFiltration() throws InterruptedException, IOException {
         int expectedCountOfDresses = 3;
-        WebElement womenCategories = wait.until(ExpectedConditions.elementToBeClickable(By.xcd path("//span[@class='badge pull-right']")));
+        WebElement womenCategories = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='badge pull-right']")));
         womenCategories.click();
         WebElement dressCategory = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='/category_products/1']")));
         dressCategory.click();
