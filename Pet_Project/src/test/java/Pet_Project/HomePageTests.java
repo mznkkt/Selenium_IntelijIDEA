@@ -70,7 +70,7 @@ public class HomePageTests {
     @AfterMethod
     public void tearDown() {
         if (driver != null) {
-            log.info("Закрытие драйвера");
+            log.info("Закрытие драйвера)");
             driver.quit();
         }
     }
