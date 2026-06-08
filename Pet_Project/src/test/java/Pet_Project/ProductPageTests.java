@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -19,8 +20,12 @@ import ru.yandex.qatools.ashot.Screenshot;
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 
 import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
@@ -35,7 +40,7 @@ public class ProductPageTests {
 
 
     @BeforeMethod
-    public void setUp() throws InterruptedException {
+    public void setUp() throws InterruptedException, MalformedURLException {
         log.info("Инициализация драйвера");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
@@ -43,7 +48,7 @@ public class ProductPageTests {
         options.addArguments("--disable-gpu");
         //options.addArguments("--disable-javascript");// - для того чтобы открыть DevTools и увидеть баннер в HTML,
         // т.к при обнаружении DevTools срабатывает защита: баннер удаляется или скрывается
-        driver = new ChromeDriver(options);
+        driver = new RemoteWebDriver(new URL("http://127.0.0.1:8989/wd/hub"), options);
         //driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://automationexercise.com/products");
@@ -65,9 +70,16 @@ public class ProductPageTests {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
+    @Attachment(value = "Полноэкранный скриншот: {description}", type = "image/png")
+    public byte[] attachFullPageScreenshot(BufferedImage image, String description) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", baos);
+        return baos.toByteArray();
+    }
+
     @SuppressWarnings("unchecked")
     @Test(priority = 1)
-    public void allProductImagesLoadedViaSingleJS() {
+    public void allProductImagesLoadedViaSingleJS() throws IOException {
 
         List<WebElement> images = driver.findElements(By.xpath("//div[@class='product-image-wrapper']//img"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -86,6 +98,10 @@ public class ProductPageTests {
             Assert.assertTrue(loadStatus.get(i),
                     "Не загружено изображение " + (i+1) + ": " + images.get(i).getAttribute("src"));
         }
+        Screenshot screenshot = new AShot()
+                .shootingStrategy(ShootingStrategies.viewportPasting(1000))
+                .takeScreenshot(driver);
+        attachFullPageScreenshot(screenshot.getImage(), "Весь каталог товаров");
         takeScreenshot(driver, "Изображения товаров загружены успешно");
         log.info("Тест \"Загрузка всех изображений на странице\" успешно завершен");
     }
@@ -136,7 +152,10 @@ public class ProductPageTests {
         Screenshot screenshot = new AShot()
                 .shootingStrategy(ShootingStrategies.viewportPasting(1000))
                 .takeScreenshot(driver);
-        ImageIO.write(screenshot.getImage(), "PNG", new File("./screenshot/fullpage.png"));
+        attachFullPageScreenshot(screenshot.getImage(), "Фильтрация");
+        File dir = new File("./screenshot");
+        if (!dir.exists()) dir.mkdirs();  // создаём папку, если её нет
+        ImageIO.write(screenshot.getImage(), "PNG", new File(dir, "fullpage.png"));
         Assert.assertEquals(actualCountOfDresses, expectedCountOfDresses,
                 "Количество найденных товаров не совпадает. Ожидалось: " + expectedCountOfDresses + ", фактически: " + actualCountOfDresses);
         log.info("Тест \"Фильтрация товаров\" успешно завершен");

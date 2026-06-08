@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  selenium-chrome:
+    image: selenium/standalone-chrome:latest
+    container_name: selenium-chrome
+    ports:
+      - "8989:4444"   # WebDriver
+      - "7900:7900"   # VNC (noVNC)
+    environment:
+      - SE_VNC_NO_PASSWORD=1      # отключает пароль (удобно для noVNC)
+      - SE_SCREEN_WIDTH=1920
+      - SE_SCREEN_HEIGHT=1080
+    shm_size: 2gb
