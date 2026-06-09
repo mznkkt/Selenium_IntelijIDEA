@@ -23,7 +23,7 @@ jobs:
     # ----- ДОБАВЛЕННЫЕ ШАГИ ДЛЯ SELENIUM С working-directory -----
     - name: Start Selenium container via Docker Compose
       working-directory: ./Pet_Project   # <-- переходим в папку проекта
-      run: docker compose up -d
+      run: docker-compose up -d
 
     - name: Wait for Selenium Grid to be ready
       run: |
