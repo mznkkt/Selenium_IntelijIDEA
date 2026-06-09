@@ -45,9 +45,10 @@ jobs:
     - name: Run tests with Maven
       working-directory: ./Pet_Project   # <-- запускаем Maven внутри Pet_Project
       run: mvn clean test
+      
     - name: Generate Allure Report
       working-directory: ./Pet_Project
-      run: mvn allure:report
+      run: mvn io.qameta.allure:allure-maven:2.15.0:report
 
     - name: Upload Allure Report
       if: always()
