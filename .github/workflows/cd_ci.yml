@@ -59,12 +59,13 @@ jobs:
       with:
         name: test-screenshots
         path: Pet_Project/screenshot/    # <-- путь относительно корня репозитория
-    - name: Upload test reports
+    - name: Test Report
+      uses: dorny/test-reporter@v1
       if: always()
-      uses: actions/upload-artifact@v4
       with:
-         name: surefire-reports
-         path: Pet_Project/target/surefire-reports/
+       name: TestNG Results
+       path: Pet_Project/target/surefire-reports/testng-results.xml
+       reporter: java-junit   # умеет читать testng-results.xml (хотя и называется java-junit)
 
     - name: Stop and remove containers
       if: always()
