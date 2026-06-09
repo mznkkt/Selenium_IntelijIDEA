@@ -23,7 +23,7 @@ jobs:
     # ----- ДОБАВЛЕННЫЕ ШАГИ ДЛЯ SELENIUM С working-directory -----
     - name: Start Selenium container via Docker Compose
       working-directory: ./Pet_Project   # <-- переходим в папку проекта
-      run: docker-compose up -d
+      run: docker compose -f docker-compose.yml up -d
 
     - name: Wait for Selenium Grid to be ready
       run: |
@@ -54,7 +54,7 @@ jobs:
     - name: Stop and remove containers
       if: always()
       working-directory: ./Pet_Project
-      run: docker compose down
+      run: docker compose -f docker-compose.yml down
 
     # Опционально: если dependency graph относится только к Pet_Project, можно оставить как есть
     - name: Update dependency graph
