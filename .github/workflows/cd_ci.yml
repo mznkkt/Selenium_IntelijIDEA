@@ -45,16 +45,16 @@ jobs:
     - name: Run tests with Maven
       working-directory: ./Pet_Project   # <-- запускаем Maven внутри Pet_Project
       run: mvn clean test
+    - name: Generate Allure Report
+      working-directory: ./Pet_Project
+      run: mvn allure:report
 
-    - name: List surefire reports
-      run: ls -la Pet_Project/target/surefire-reports/
-
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
+    - name: Upload Allure Report
       if: always()
+      uses: actions/upload-artifact@v4
       with:
-        files: Pet_Project/target/surefire-reports/TEST-*.xml
-        check_name: "JUnit Test Results"
+       name: allure-report
+       path: Pet_Project/target/site/allure-maven-plugin/
 
     - name: Upload screenshots
       if: always()
@@ -62,13 +62,7 @@ jobs:
       with:
         name: test-screenshots
         path: Pet_Project/screenshot/    # <-- путь относительно корня репозитория
-    - name: Test Report
-      uses: dorny/test-reporter@v1
-      if: always()
-      with:
-       name: TestNG Results
-       path: Pet_Project/target/surefire-reports/testng-results.xml
-       reporter: java-junit   # умеет читать testng-results.xml (хотя и называется java-junit)
+  
 
     - name: Stop and remove containers
       if: always()
