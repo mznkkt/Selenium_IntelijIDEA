@@ -52,6 +52,12 @@ jobs:
       with:
         name: test-screenshots
         path: Pet_Project/screenshot/    # <-- путь относительно корня репозитория
+    - name: Upload test reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+         name: surefire-reports
+         path: Pet_Project/target/surefire-reports/
 
     - name: Stop and remove containers
       if: always()
