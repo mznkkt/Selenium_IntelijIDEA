@@ -158,7 +158,7 @@ public class ProductPageTests {
         ImageIO.write(screenshot.getImage(), "PNG", new File(dir, "fullpage.png"));
         Assert.assertEquals(actualCountOfDresses, expectedCountOfDresses,
                 "Количество найденных товаров не совпадает. Ожидалось: " + expectedCountOfDresses + ", фактически: " + actualCountOfDresses);
-        log.info("Тест \"Фильтрация товаров\" успешно завершен");
+        log.info("Тест \"Фильтрация товаров\" успешно завершен!");
     }
 
 
