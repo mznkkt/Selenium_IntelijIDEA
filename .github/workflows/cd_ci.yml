@@ -46,12 +46,15 @@ jobs:
       working-directory: ./Pet_Project   # <-- запускаем Maven внутри Pet_Project
       run: mvn clean test
 
+    - name: List surefire reports
+      run: ls -la Pet_Project/target/surefire-reports/
+
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
       with:
-       files: Pet_Project/target/surefire-reports/*.xml
-       check_name: "Test Results"
+        files: Pet_Project/target/surefire-reports/TEST-*.xml
+        check_name: "JUnit Test Results"
 
     - name: Upload screenshots
       if: always()
