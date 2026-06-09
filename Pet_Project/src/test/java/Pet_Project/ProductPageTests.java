@@ -2,6 +2,7 @@ package Pet_Project;
 
 import io.qameta.allure.Attachment;
 import org.apache.commons.io.FileUtils;
+import org.jspecify.annotations.NonNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -26,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 
@@ -40,21 +43,36 @@ public class ProductPageTests {
 
 
     @BeforeMethod
-    public void setUp() throws InterruptedException, MalformedURLException {
+    public void setUp() throws InterruptedException, IOException {
         log.info("Инициализация драйвера");
+        ChromeOptions options = getChromeOptions();
+        driver = new RemoteWebDriver(new URL("http://127.0.0.1:8989/wd/hub"), options);
+        //driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.get("https://automationexercise.com/products");
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("debug_screenshot.png"));
+
+        // Сохраняем HTML
+        String pageSource = driver.getPageSource();
+        Files.write(Paths.get("debug_page.html"), pageSource.getBytes());
+
+        searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("search")));
+        submitSearch = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit_search")));
+
+    }
+
+    private static @NonNull ChromeOptions getChromeOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless=new");
         //options.addArguments("--window-size=1920,1080");
         options.addArguments("--disable-gpu");
         //options.addArguments("--disable-javascript");// - для того чтобы открыть DevTools и увидеть баннер в HTML,
         // т.к при обнаружении DevTools срабатывает защита: баннер удаляется или скрывается
-        driver = new RemoteWebDriver(new URL("http://127.0.0.1:8989/wd/hub"), options);
-        //driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.get("https://automationexercise.com/products");
-        searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("search")));
-        submitSearch = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit_search")));
-
+        options.addArguments("--disable-blink-features=AutomationControlled");
+        options.addArguments("--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.7778.178 Safari/537.36");
+        options.addArguments("--no-sandbox", "--disable-dev-shm-usage"); // полезно для CI
+        return options;
     }
 
     @AfterMethod
