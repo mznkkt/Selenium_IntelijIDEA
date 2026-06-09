@@ -29,10 +29,11 @@ jobs:
       run: |
        echo "Waiting for Selenium on port 8989..."
        for i in {1..90}; do
-        if curl -s http://localhost:8989/status | grep -q '"ready":true'; then
+       # Проверяем доступность /wd/hub/status (более стабильный эндпоинт)
+       if curl -s -f http://localhost:8989/wd/hub/status; then
         echo "Selenium is ready!"
         exit 0
-        fi
+       fi
        echo "Attempt $i/90 - still waiting..."
        sleep 2
        done
