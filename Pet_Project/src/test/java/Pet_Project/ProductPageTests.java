@@ -1,6 +1,7 @@
 package Pet_Project;
 
 import io.qameta.allure.Attachment;
+import io.qameta.allure.testng.AllureTestNg;
 import org.apache.commons.io.FileUtils;
 import org.jspecify.annotations.NonNull;
 import org.openqa.selenium.*;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
@@ -32,6 +34,8 @@ import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 
+
+@Listeners({AllureTestNg.class})
 public class ProductPageTests {
 
     private WebDriver driver;
