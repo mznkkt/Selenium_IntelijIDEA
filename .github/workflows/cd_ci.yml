@@ -46,6 +46,13 @@ jobs:
       working-directory: ./Pet_Project   # <-- запускаем Maven внутри Pet_Project
       run: mvn clean test
 
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+       files: Pet_Project/target/surefire-reports/*.xml
+       check_name: "Test Results"
+
     - name: Upload screenshots
       if: always()
       uses: actions/upload-artifact@v4
