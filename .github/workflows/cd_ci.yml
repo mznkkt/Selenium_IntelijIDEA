@@ -46,6 +46,11 @@ jobs:
       working-directory: ./Pet_Project   # <-- запускаем Maven внутри Pet_Project
       run: mvn clean test
 
+    - name: List allure-results contents
+      run: |
+       ls -la Pet_Project/target/allure-results/ || echo "No allure-results directory"
+       find Pet_Project/target/allure-results -name "*.json" || echo "No JSON files"
+
     - name: Upload debug artifacts
       if: always()
       uses: actions/upload-artifact@v4
