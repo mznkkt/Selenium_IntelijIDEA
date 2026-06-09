@@ -174,7 +174,7 @@ public class ProductPageTests {
         Screenshot screenshot = new AShot()
                 .shootingStrategy(ShootingStrategies.viewportPasting(1000))
                 .takeScreenshot(driver);
-        attachFullPageScreenshot(screenshot.getImage(), "Фильтрация");
+        attachFullPageScreenshot(screenshot.getImage(), "Фильтрация:)");
         File dir = new File("./screenshot");
         if (!dir.exists()) dir.mkdirs();  // создаём папку, если её нет
         ImageIO.write(screenshot.getImage(), "PNG", new File(dir, "fullpage.png"));
