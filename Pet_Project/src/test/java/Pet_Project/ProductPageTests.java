@@ -52,8 +52,8 @@ public class ProductPageTests {
         //driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://automationexercise.com/products");
-        searchBox = driver.findElement(By.name("search"));
-        submitSearch = driver.findElement(By.id("submit_search"));
+        searchBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("search")));
+        submitSearch = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit_search")));
 
     }
 
