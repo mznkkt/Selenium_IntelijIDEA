@@ -45,6 +45,15 @@ jobs:
     - name: Run tests with Maven
       working-directory: ./Pet_Project   # <-- запускаем Maven внутри Pet_Project
       run: mvn clean test
+
+    - name: Upload debug artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+          name: debug
+          path: |
+            Pet_Project/debug_screenshot.png
+            Pet_Project/debug_page.html
       
     - name: Download Allure CLI
       run: |
