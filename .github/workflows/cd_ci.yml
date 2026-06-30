@@ -67,16 +67,17 @@ jobs:
         name: test-screenshots
         path: Pet_Project/screenshot/
 
-          # ----- ОБНОВЛЕННЫЙ БЛОК: Сборка Allure и деплой на сайт -----
-      # ----- ОФИЦИАЛЬНАЯ И СТАБИЛЬНАЯ СБОРКА ALLURE -----
-    # 1. Автоматически и безопасно устанавливаем Allure CLI без curl и unzip
-    - name: Setup Allure CLI
+           # ----- СТАБИЛЬНЫЙ БЛОК: СКАЧИВАНИЕ, СБОРКА И ДЕПЛОЙ ALLURE -----
+    
+    # 1. Скачиваем Allure CLI по прямой ссылке на бинарный архив (а не на страницу релиза)
+    - name: Download Allure CLI
       if: always()
-      uses: egor-tensin/setup-allure@v1
-      with:
-        allure-version: '2.33.0'
+      run: |
+        curl -o allure.zip -L https://github.com
+        unzip allure.zip -d /tmp/
+        echo "/tmp/allure-2.33.0/bin" >> $GITHUB_PATH
 
-    # 2. Скачиваем прошлую историю с сайта (gh-pages)
+    # 2. Скачиваем историю прошлых тестов из ветки gh-pages, если она существует
     - name: Get Allure history
       uses: actions/checkout@v4
       if: always()
@@ -85,7 +86,7 @@ jobs:
         ref: gh-pages
         path: allure-history-temp
 
-    # 3. Копируем историю в результаты для склейки графиков тренда
+    # 3. Копируем прошлую историю в текущие результаты, чтобы склеить графики тренда
     - name: Copy Allure history to results
       if: always()
       run: |
@@ -93,12 +94,18 @@ jobs:
           cp -r allure-history-temp/history Pet_Project/target/allure-results/
         fi
 
-    # 4. Генерируем красивый HTML-отчет
+    # 4. Генерируем свежий HTML-отчет в чистую папку allure-report-site
     - name: Generate Allure Report
       if: always()
       run: allure generate Pet_Project/target/allure-results --clean -o allure-report-site
 
-    # 5. Публикуем готовый сайт. Плагин ПРИНУДИТЕЛЬНО сам создаст ветку gh-pages
+    # 5. Сохраняем новую историю внутри сгенерированного отчета
+    - name: Save new history trend
+      if: always()
+      run: |
+        cp -r allure-report-site/history Pet_Project/target/allure-results/ || true
+
+    # 6. Автоматически публикуем отчет на GitHub Pages (плагин сам создаст ветку gh-pages)
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       if: always()
@@ -111,4 +118,3 @@ jobs:
       if: always()
       working-directory: ./Pet_Project
       run: docker compose -f docker-compose.yml down
-
