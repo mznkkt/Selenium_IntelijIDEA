@@ -67,21 +67,21 @@ jobs:
         name: test-screenshots
         path: Pet_Project/screenshot/
 
-    # ----- ОБНОВЛЕННЫЙ БЛОК: Умная генерация Allure с историей -----
+       # ----- ОБНОВЛЕННЫЙ БЛОК: Современная генерация Allure без Java 8 -----
     - name: Get Allure history
       uses: actions/checkout@v4
       if: always()
       with:
-        ref: gh-pages # Скачиваем историю из специальной ветки сайта
+        ref: gh-pages
         path: gh-pages
 
-    - name: Generate Allure Report
-      uses: simple-elf/allure-report-action@v1.9
+    - name: Build Allure Report with History
+      uses: mgrybyk-org/allure-report-gh-pages-action@v2
       if: always()
       with:
         allure_results: Pet_Project/target/allure-results
         allure_history: allure-history
-        keep_reports: 20 # Храним историю последних 20 запусков
+        keep_reports: 20
 
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
@@ -95,3 +95,4 @@ jobs:
       if: always()
       working-directory: ./Pet_Project
       run: docker compose -f docker-compose.yml down
+
