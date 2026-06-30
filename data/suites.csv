@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","984","numberOfProductsBySearch","MySuite","2026-06-30","passed","2026-06-30","Pet_Project.ProductPageTests","AllTests","Pet_Project.ProductPageTests","numberOfProductsBySearch"
+"","1073","searchCatalog","MySuite","2026-06-30","passed","2026-06-30","Pet_Project.ProductPageTests","AllTests","Pet_Project.ProductPageTests","searchCatalog"
+"","47","searchBoxIsDisplayed","MySuite","2026-06-30","passed","2026-06-30","Pet_Project.ProductPageTests","AllTests","Pet_Project.ProductPageTests","searchBoxIsDisplayed"
+"","29978","allProductImagesLoadedViaSingleJS","MySuite","2026-06-30","passed","2026-06-30","Pet_Project.ProductPageTests","AllTests","Pet_Project.ProductPageTests","allProductImagesLoadedViaSingleJS"
+"","8417","usingFiltration","MySuite","2026-06-30","passed","2026-06-30","Pet_Project.ProductPageTests","AllTests","Pet_Project.ProductPageTests","usingFiltration"
