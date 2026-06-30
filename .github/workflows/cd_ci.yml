@@ -1,15 +1,14 @@
 name: Java CI with Maven
 
-
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
-# ----- ДОБАВЛЕНО: Права для автоматической публикации сайта -----
+# ----- ДОБАВЛЕНО: Явное указание прав на чтение и запись для бота -----
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -26,6 +25,9 @@ jobs:
        java-version: '23'
        distribution: 'oracle'
        cache: maven
+
+    # ... далее идут все ваши неизмененные шаги: docker compose, mvn clean test, npm install, deploy ...
+
 
     # ----- ДОБАВЛЕННЫЕ ШАГИ ДЛЯ SELENIUM С working-directory -----
     - name: Start Selenium container via Docker Compose
