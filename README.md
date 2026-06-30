@@ -1,2 +1,1 @@
-[![Java CI with Maven](https://github.com)](https://github.com)
-
+[![Java CI with Maven](https://github.com/mznkkt/Selenium_IntelijIDEA/actions/workflows/cd_ci.yml/badge.svg)](https://github.com/mznkkt/Selenium_IntelijIDEA/actions/workflows/cd_ci.yml)
